@@ -1,19 +1,26 @@
 function totalDigitRekursif(angka) {
-  var sum = 0;
 
-  // split  number
-  var numbers = angka.toString().split('');
+  var Numnum = angka.toString().split('');
+  var sum = 0
+  //for (var i=0; i < stringA.length ; i++) {
 
-  while (numbers.length > 0) {
+  if (Numnum.length > 1) {
+    sum = sum + parseInt(Numnum[0]);
+    Numnum.splice(0, 1);
 
-    sum += parseInt(numbers[0]);
-    // remove the number that was just added to sum
-    numbers.splice(0, 1);
-    totalDigitRekursif(numbers.join(''));
+    return sum + totalDigitRekursif(parseInt(Numnum.join('')));
+
+
+  } else {
+    return sum + Number(Numnum[0]);
   }
 
 
-  return sum;
+
+
+
+
+
 
 }
 
