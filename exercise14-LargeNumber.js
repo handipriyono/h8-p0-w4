@@ -24,19 +24,18 @@ function getTotal(arrNumber) {
     }
   }
 
+  if (arrNumber[0] === undefined) {
+    return ' "" ';
+  }
 
-  return total;
+  return "Angka paling besar adalah " + arrNumber[0] + " dan jumlah kemunculan sebanyak " + total + " kali";
 }
 
 function mostFrequentLargestNumbers(arrNumber) {
   var listSort = sorting(arrNumber);
   var countHighest = getTotal(listSort);
+  return countHighest;
 
-  if (arrNumber.length === 0) {
-    return "'' ";
-  } else {
-    return "angka paling besar adalah " + arrNumber[0] + " dan jumlah kemunculan sebanyak " + countHighest + " kali";
-  }
   //return countHighest;
 }
 
