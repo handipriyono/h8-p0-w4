@@ -5,104 +5,44 @@ function countProfit(shoppers) {
     ['Sweater Uniklooh', 175000, 1],
   ];
 
-  // menampung object
-  var objku1 = {};
-  var objku2 = {};
-  var objku3 = {};
-
-  // default asignment:  if they don't buy the product:
-  var sisa1 = listBarang[0][2];
-  var sisa2 = listBarang[1][2];
-  var sisa3 = listBarang[2][2];
-
-  var pembeli1 = [];
-  var pembeli2 = [];
-  var pembeli3 = [];
-
-  var profit1 = 0;
-  var profit2 = 0;
-  var profit3 = 0;
-
-  // default asignment (empty)
-
-  for (var m = 0; m < 3; m++) {
-
-    if (m === 0) {
-      objku1.product = listBarang[0][0];
-      objku1.shoppers = pembeli1;
-      objku1.leftOver = sisa1;
-      objku1.totalProfit = profit1;
-    } else if (m === 1) {
-
-      objku2.product = listBarang[1][0];
-      objku2.shoppers = pembeli2;
-      objku2.leftOver = sisa2;
-      objku2.totalProfit = profit2;
-    } else {
-
-      objku3.product = listBarang[2][0];
-      objku3.shoppers = pembeli3;
-      objku3.leftOver = sisa3;
-      objku3.totalProfit = profit3;
-    }
-
-  }
-
-  // store all object to array:
+  var pembeli = [];
   var all = [];
 
-  for (var i = 0; i < shoppers.length; i++) {
-    if (
-      listBarang[0][0] === shoppers[i].product &&
-      sisa1 >= shoppers[i].amount
-    ) {
-      objku1.product = listBarang[0][0];
-      pembeli1.push(shoppers[i].name);
-      objku1.shoppers = pembeli1;
-
-      sisa1 -= shoppers[i].amount;
-      objku1.leftOver = sisa1;
-
-      profit1 = (listBarang[0][2] - sisa1) * listBarang[0][1];
-      objku1.totalProfit = profit1;
-    } else if (
-      listBarang[1][0] === shoppers[i].product &&
-      sisa2 >= shoppers[i].amount
-    ) {
-      objku2.product = listBarang[1][0];
-      pembeli2.push(shoppers[i].name);
-      objku2.shoppers = pembeli2;
-
-      sisa2 -= shoppers[i].amount;
-      objku2.leftOver = sisa2;
-
-      profit2 = (listBarang[1][2] - sisa2) * listBarang[1][1];
-      objku2.totalProfit = profit2;
-    } else if (
-      listBarang[2][0] === shoppers[i].product &&
-      sisa3 >= shoppers[i].amount
-    ) {
-      objku3.product = listBarang[2][0];
-      pembeli3.push(shoppers[i].name);
-      objku3.shoppers = pembeli3;
-
-      sisa3 -= shoppers[i].amount;
-      objku3.leftOver = sisa3;
-
-      profit3 = (listBarang[2][2] - sisa3) * listBarang[2][1];
-      objku3.totalProfit = profit3;
-    }
-  }
-
-  // is array empty?
   if (shoppers.length === 0) {
     return all;
-  } else {
-    all.push(objku1, objku2, objku3);
-
-    return all;
   }
 
+  for (var i = 0; i < listBarang.length; i++) {
+    var obj = {};
+
+    obj.product = listBarang[i][0];
+    obj.shoppers = [];
+    obj.leftOver = listBarang[i][2];
+    obj.totalProfit = 0;
+
+    var sisa = listBarang[i][2];
+
+    for (var j = 0; j < shoppers.length; j++) {
+      if (listBarang[i][0] === shoppers[j].product) {
+
+        if (sisa >= shoppers[j].amount) {
+
+          pembeli.push(shoppers[j].name);
+
+          obj.shoppers.push(shoppers[j].name);
+          sisa -= shoppers[j].amount;
+
+          obj.leftOver = sisa;
+          obj.totalProfit = (listBarang[i][2] - sisa) * listBarang[i][1];
+
+        }
+      }
+    }
+
+    all.push(obj);
+  }
+
+  return all;
 }
 
 // TEST CASES only bro!:
