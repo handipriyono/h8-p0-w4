@@ -1,9 +1,9 @@
 function cariModus(arr) {
   // handi //
-  var total = 0;
+
   var siapa = [];
   for (let i = 0; i < arr.length; i++) {
-    total = 0;
+
     var cek = false;
     for (let j = 0; j < arr.length; j++) {
       if (arr[i] === arr[j] && i !== j) {
